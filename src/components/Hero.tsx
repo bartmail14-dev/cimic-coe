@@ -1,9 +1,10 @@
 import { motion, useScroll, useTransform } from 'motion/react';
-import { ArrowRight, Shield, Users, Globe, Target, Activity, Lock } from 'lucide-react';
+import { ArrowRight, Activity, Shield } from 'lucide-react';
 import { Button } from './ui/button';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { TacticalDataStream } from './TacticalDataStream';
 import { useState, useEffect } from 'react';
+import { heroStats, heroImage } from '@/data/hero';
 
 export function Hero() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -25,18 +26,14 @@ export function Hero() {
     }
   };
 
-  const stats = [
-    { icon: Users, value: '30+', label: 'Member Nations', color: '#f7941d' },
-    { icon: Globe, value: '15+', label: 'Years Active', color: '#7a8f5c' },
-    { icon: Shield, value: '100+', label: 'Operations', color: '#f7941d' },
-  ];
+  const stats = heroStats;
 
   return (
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden bg-[#1a1f12]">
       {/* Background with parallax */}
       <motion.div style={{ y }} className="absolute inset-0">
         <ImageWithFallback
-          src="https://images.unsplash.com/photo-1698833994916-e5270f571a42?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtaWxpdGFyeSUyMGNvb3BlcmF0aW9uJTIwaGFuZHNoYWtlfGVufDF8fHx8MTc2MTg0MDQ4OHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+          src={heroImage}
           alt="Civil-Military Cooperation"
           className="w-full h-full object-cover"
         />

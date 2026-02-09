@@ -2,8 +2,9 @@ import { motion } from 'motion/react';
 import { useInView } from 'motion/react';
 import { useRef, useState } from 'react';
 import { Card } from './ui/card';
-import { BookOpen, GraduationCap, FileText, Presentation, ArrowRight, Zap, Target, Database } from 'lucide-react';
+import { BookOpen, ArrowRight, Database } from 'lucide-react';
 import { Button } from './ui/button';
+import { resources } from '@/data/resources';
 
 interface KnowledgeHubProps {
   onHandbookClick?: () => void;
@@ -14,52 +15,7 @@ export function KnowledgeHub({ onHandbookClick }: KnowledgeHubProps) {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
-  const resources = [
-    {
-      id: 1,
-      icon: Presentation,
-      title: 'Our Seminar Series',
-      description: 'Our seminars are a cornerstone of our mission to foster unity of purpose in the field of civil-military interaction.',
-      accentIcon: Target,
-      color: '#f7941d',
-      gradient: 'from-orange-50 to-orange-100',
-      stat: '12+ Annually',
-      code: 'SEM-001',
-    },
-    {
-      id: 2,
-      icon: BookOpen,
-      title: 'The CIMIC Handbook',
-      description: 'Your essential tactical guide for understanding and applying CIMIC principles in real-world situations.',
-      accentIcon: Database,
-      color: '#5a6b3f',
-      gradient: 'from-green-50 to-green-100',
-      stat: '500+ Pages',
-      code: 'HND-001',
-    },
-    {
-      id: 3,
-      icon: FileText,
-      title: 'Our Publications',
-      description: 'The CCOE offers among others Concept Support and Subject Matter Expertise.',
-      accentIcon: Zap,
-      color: '#f7941d',
-      gradient: 'from-orange-50 to-orange-100',
-      stat: '50+ Docs',
-      code: 'PUB-001',
-    },
-    {
-      id: 4,
-      icon: GraduationCap,
-      title: 'Our Courses',
-      description: 'We offer a wide range of training opportunities related to and adjacent to Civil-Military Cooperation (CIMIC).',
-      accentIcon: Target,
-      color: '#5a6b3f',
-      gradient: 'from-green-50 to-green-100',
-      stat: '5 Programs',
-      code: 'CRS-001',
-    },
-  ];
+  // resources imported from @/data/resources
 
   return (
     <section id="knowledge" ref={ref} className="py-24 bg-gradient-to-br from-gray-50 via-white to-gray-100 relative overflow-hidden">

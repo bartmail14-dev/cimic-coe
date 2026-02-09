@@ -1,10 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import {
-  Facebook,
-  Linkedin,
-  Youtube,
-  Instagram,
   Mail,
   MapPin,
   Phone,
@@ -15,6 +11,7 @@ import {
   ChevronRight,
   Zap
 } from 'lucide-react';
+import { usefulLinks, quickAccessLinks, socialLinks } from '@/data/navigation';
 
 export function Footer() {
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -25,30 +22,7 @@ export function Footer() {
     return () => clearInterval(t);
   }, []);
 
-  const usefulLinks = [
-    { label: 'Home', href: '#hero' },
-    { label: 'About Us', href: '#about' },
-    { label: 'Our Courses', href: '#courses' },
-    { label: 'Mission & Vision', href: '#mission' },
-    { label: 'News & Events', href: '#news' },
-    { label: 'Knowledge Hub', href: '#knowledge' },
-  ];
-
-  const quickAccess = [
-    { label: 'Training Programs', href: '#courses' },
-    { label: 'Seminar Series', href: '#knowledge' },
-    { label: 'CIMIC Handbook', href: '#knowledge' },
-    { label: 'Publications', href: '#knowledge' },
-    { label: 'Intel Briefings', href: '#news' },
-    { label: 'Partner Network', href: '#about' },
-  ];
-
-  const socialLinks = [
-    { icon: Linkedin, href: '#', label: 'LinkedIn', color: '#0077b5' },
-    { icon: Instagram, href: '#', label: 'Instagram', color: '#e4405f' },
-    { icon: Facebook, href: '#', label: 'Facebook', color: '#1877f2' },
-    { icon: Youtube, href: '#', label: 'YouTube', color: '#ff0000' },
-  ];
+  const quickAccess = quickAccessLinks;
 
   return (
     <footer className="bg-gradient-to-b from-[#0a0e08] via-[#0f1410] to-[#050708] text-white relative overflow-hidden border-t-2 border-[#f7941d]">

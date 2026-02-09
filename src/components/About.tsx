@@ -1,7 +1,8 @@
 import { motion, useInView, useMotionValue, useSpring, useTransform } from 'motion/react';
 import { useRef, useEffect, useState } from 'react';
-import { Target, BookOpen, Award, Lightbulb, Users, Globe, Shield, Compass } from 'lucide-react';
+import { Target, Shield } from 'lucide-react';
 import { TacticalNationsDisplay } from './TacticalNationsDisplay';
+import { features, stats as statsData } from '@/data/about';
 
 function AnimatedCounter({ target, label, suffix = '' }: { target: number; label: string; suffix?: string }) {
   const ref = useRef(null);
@@ -105,38 +106,7 @@ export function About() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
-  const features = [
-    {
-      icon: Target,
-      title: 'Strategic Focus',
-      description: 'Developing doctrine, best practices, and standards for civil-military cooperation in modern operational environments.',
-    },
-    {
-      icon: BookOpen,
-      title: 'Education & Training',
-      description: 'Providing world-class education and training programs for CIMIC practitioners worldwide.',
-    },
-    {
-      icon: Award,
-      title: 'NATO Accredited',
-      description: 'Officially recognized NATO Centre of Excellence since 2001, serving alliance members.',
-    },
-    {
-      icon: Lightbulb,
-      title: 'Innovation Hub',
-      description: 'Leading research and innovation in civil-military interaction methodologies.',
-    },
-    {
-      icon: Globe,
-      title: 'Global Network',
-      description: 'Connecting military and civilian organizations across continents for effective cooperation.',
-    },
-    {
-      icon: Shield,
-      title: 'Mission Ready',
-      description: 'Preparing personnel for complex operations requiring civil-military coordination.',
-    },
-  ];
+  // features imported from @/data/about
 
   return (
     <section id="about" ref={ref} className="relative py-32 bg-white overflow-hidden">
@@ -409,10 +379,9 @@ export function About() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-24 max-w-5xl mx-auto"
         >
-          <AnimatedCounter target={2001} label="Established" />
-          <AnimatedCounter target={8} label="Contributing Nations" />
-          <AnimatedCounter target={30} label="Partners" suffix="+" />
-          <AnimatedCounter target={500} label="Annual Trainees" suffix="+" />
+          {statsData.map((stat) => (
+            <AnimatedCounter key={stat.label} target={stat.target} label={stat.label} suffix={stat.suffix} />
+          ))}
         </motion.div>
 
         {/* Tactical Nations Display - Replaces old image grid */}

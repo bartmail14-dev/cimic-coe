@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Menu, X, Radio, Book } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Button } from './ui/button';
+import { navItems } from '@/data/navigation';
 interface HeaderProps {
   currentPage: 'home' | 'handbook';
   onNavigate: (page: 'home' | 'handbook') => void;
@@ -33,14 +34,7 @@ export function Header({ currentPage, onNavigate }: HeaderProps) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navItems = [
-    { label: 'Home', href: '#home', id: 'home' },
-    { label: 'About', href: '#about', id: 'about' },
-    { label: 'Courses', href: '#courses', id: 'courses' },
-    { label: 'Mission', href: '#mission', id: 'mission' },
-    { label: 'News', href: '#news', id: 'news' },
-    { label: 'Partners', href: '#partners', id: 'partners' },
-  ];
+  // navItems imported from @/data/navigation
 
   const scrollToSection = (href: string) => {
     if (currentPage !== 'home') {

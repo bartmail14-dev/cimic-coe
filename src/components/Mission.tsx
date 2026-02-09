@@ -2,8 +2,8 @@ import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import { useInView } from 'motion/react';
 import { useRef, useState, useEffect } from 'react';
 import { Card } from './ui/card';
-import { Compass, Eye, Users, BookCheck, Network, Shield, Target, Radio, Zap, Globe, Award, ChevronRight } from 'lucide-react';
-import { ImageWithFallback } from './figma/ImageWithFallback';
+import { Compass, Eye, Shield, Target, Radio, Zap, Globe, Award, ChevronRight } from 'lucide-react';
+import { coreValues } from '@/data/mission';
 
 export function Mission() {
   const ref = useRef(null);
@@ -49,40 +49,7 @@ export function Mission() {
     return () => clearInterval(interval);
   }, []);
 
-  const values = [
-    {
-      icon: Users,
-      title: 'Collaboration',
-      code: 'COL',
-      description: 'Building bridges between military and civilian organizations for effective partnerships.',
-      stat: '8 Nations',
-      color: '#f7941d'
-    },
-    {
-      icon: BookCheck,
-      title: 'Excellence',
-      code: 'EXC',
-      description: 'Maintaining the highest standards in education, training, and doctrine development.',
-      stat: '2500+ Trained',
-      color: '#5a6b3f'
-    },
-    {
-      icon: Network,
-      title: 'Integration',
-      code: 'INT',
-      description: 'Promoting seamless cooperation across different organizations and cultures.',
-      stat: '45+ Partners',
-      color: '#f7941d'
-    },
-    {
-      icon: Shield,
-      title: 'Integrity',
-      code: 'ITG',
-      description: 'Upholding professional ethics and transparency in all our operations.',
-      stat: 'ISO Certified',
-      color: '#5a6b3f'
-    },
-  ];
+  const values = coreValues;
 
   return (
     <section id="mission" ref={ref} className="py-24 relative overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-100">
