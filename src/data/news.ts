@@ -29,8 +29,7 @@ export const newsItems: NewsItem[] = [
     status: 'ACTIVE',
     icon: Shield,
     color: '#f7941d',
-    image:
-      'https://images.unsplash.com/photo-1588589212255-bcc6a2bbbf95?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBtaWxpdGFyeSUyMHRyYWluaW5nfGVufDF8fHx8MTc2MTg0MDQ4OXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+    image: '/images/news-training.webp',
   },
   {
     id: 'BRIEF-002',
@@ -45,8 +44,7 @@ export const newsItems: NewsItem[] = [
     status: 'SCHEDULED',
     icon: Radio,
     color: '#5a6b3f',
-    image:
-      'https://images.unsplash.com/photo-1758518727077-ffb66ffccced?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdHJhdGVneSUyMG1lZXRpbmclMjBwcm9mZXNzaW9uYWxzfGVufDF8fHx8MTc2MTg0MDQ4OXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+    image: '/images/news-conference.webp',
   },
   {
     id: 'BRIEF-003',
@@ -61,8 +59,7 @@ export const newsItems: NewsItem[] = [
     status: 'PUBLISHED',
     icon: FileText,
     color: '#f7941d',
-    image:
-      'https://images.unsplash.com/photo-1729896972398-c39c4313eada?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkZWZlbnNlJTIwdGVjaG5vbG9neSUyMG5ldHdvcmt8ZW58MXx8fHwxNzYxODQwNDg5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+    image: '/images/news-doctrine.webp',
   },
 ];
 
