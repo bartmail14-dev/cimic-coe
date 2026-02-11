@@ -10,11 +10,12 @@ import { newsItems as newsData, newsFilters } from '@/data/news';
 export function News() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
-  const [currentTime, setCurrentTime] = useState(new Date());
+  const [currentTime, setCurrentTime] = useState<Date | null>(null);
   const [activeFilter, setActiveFilter] = useState('ALL');
 
-  // Update time every second
+  // Update time every second (set initial on mount to avoid hydration mismatch)
   useEffect(() => {
+    setCurrentTime(new Date());
     const timer = setInterval(() => {
       setCurrentTime(new Date());
     }, 1000);
@@ -107,7 +108,7 @@ export function News() {
               </div>
 
               {/* Center: Title */}
-              <div className="flex items-center gap-3">
+              <div className="hidden md:flex items-center gap-3">
                 <Radio className="w-6 h-6 text-[#f7941d]" />
                 <div>
                   <div className="text-xs text-gray-400 font-mono uppercase tracking-wider">Intelligence Briefing</div>
@@ -116,14 +117,14 @@ export function News() {
               </div>
 
               {/* Right: Live time */}
-              <div className="flex items-center gap-4 text-xs font-mono">
+              <div className="hidden sm:flex items-center gap-4 text-xs font-mono">
                 <div className="text-gray-400">
                   BRIEFING: <span className="text-[#f7941d]">{filteredNews.length} REPORTS</span>
                 </div>
                 <div className="w-px h-6 bg-[#5a6b3f]" />
                 <div className="text-gray-400">
                   <Clock className="w-3 h-3 inline mr-1" />
-                  {currentTime.toLocaleTimeString('en-US', { hour12: false })} UTC
+                  {currentTime ? currentTime.toLocaleTimeString('en-US', { hour12: false }) : '--:--:--'} UTC
                 </div>
               </div>
             </div>
@@ -135,9 +136,9 @@ export function News() {
 
         {/* TITLE SECTION */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.05 }}
           className="text-center mb-12"
         >
           <div className="inline-flex items-center gap-3 mb-6">
@@ -151,7 +152,7 @@ export function News() {
                 />
               ))}
             </div>
-            <h2 className="text-5xl md:text-6xl font-semibold uppercase tracking-wider font-mono">
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-semibold uppercase tracking-wider font-mono">
               <span className="text-[#f7941d]">Intel</span> Briefing
             </h2>
             <div className="flex gap-1">
@@ -181,7 +182,7 @@ export function News() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
           className="flex flex-wrap justify-center gap-3 mb-12"
         >
           {filters.map((filter, index) => (
@@ -224,9 +225,9 @@ export function News() {
           {filteredNews.map((item, index) => (
             <motion.div
               key={item.id}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
+              transition={{ duration: 0.4, delay: 0.2 + index * 0.1 }}
               className="group"
             >
               <Card className="bg-gradient-to-br from-gray-900 via-[#1a2310] to-gray-900 border-2 border-[#5a6b3f]/50 h-full relative overflow-hidden hover:border-[#f7941d] transition-all duration-300">

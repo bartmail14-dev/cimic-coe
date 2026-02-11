@@ -25,7 +25,7 @@ function AnimatedCounter({ target, label, suffix = '' }: { target: number; label
     <div ref={ref} className="relative group">
       <div className="absolute -inset-4 bg-gradient-to-br from-[#f7941d]/20 to-[#5a6b3f]/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       <div className="relative bg-white rounded-xl p-6 border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-        <div className="text-5xl mb-2 bg-gradient-to-br from-[#f7941d] to-[#5a6b3f] bg-clip-text text-transparent">
+        <div className="text-4xl sm:text-5xl mb-2 bg-gradient-to-br from-[#f7941d] to-[#5a6b3f] bg-clip-text text-transparent">
           {displayValue}{suffix}
         </div>
         <div className="text-sm text-gray-600 uppercase tracking-wider">{label}</div>
@@ -245,7 +245,7 @@ export function About() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: 0.2 }}
-                  className="text-6xl md:text-7xl lg:text-8xl font-semibold mb-8 leading-[1.1] relative"
+                  className="text-3xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold mb-8 leading-[1.1] relative"
                 >
                   <div className="relative inline-block">
                     <span className="block text-gray-900 mb-2 tracking-tight">

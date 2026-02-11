@@ -104,15 +104,15 @@ export function Header({ currentPage, onNavigate }: HeaderProps) {
               
               <div className="flex flex-col">
                 <div className="flex items-center gap-2">
-                  <span className="text-white tracking-tight">
+                  <span className="text-white tracking-tight whitespace-nowrap">
                     CIMIC Centre
                   </span>
-                  <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 bg-[#f7941d]/20 border border-[#f7941d]/40 rounded text-[10px] text-[#f7941d] uppercase tracking-wider">
+                  <span className="hidden xl:inline-flex items-center gap-1 px-2 py-0.5 bg-[#f7941d]/20 border border-[#f7941d]/40 rounded text-[10px] text-[#f7941d] uppercase tracking-wider">
                     <Radio className="w-2 h-2" />
                     Active
                   </span>
                 </div>
-                <span className="text-xs text-[#7a8f5c] tracking-wider uppercase">
+                <span className="text-xs text-[#7a8f5c] tracking-wider uppercase whitespace-nowrap">
                   of Excellence
                 </span>
               </div>

@@ -9,8 +9,8 @@ export function Mission() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [activeValue, setActiveValue] = useState(0);
-  const [missionCode, setMissionCode] = useState('ALPHA-001');
-  const [timestamp, setTimestamp] = useState(new Date());
+  const [missionCode, setMissionCode] = useState('');
+  const [timestamp, setTimestamp] = useState<Date | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 1000], [0, 100]);
@@ -23,8 +23,9 @@ export function Mission() {
     return () => clearInterval(interval);
   }, []);
 
-  // Update timestamp
+  // Update timestamp (set initial on mount to avoid hydration mismatch)
   useEffect(() => {
+    setTimestamp(new Date());
     const interval = setInterval(() => {
       setTimestamp(new Date());
     }, 1000);
@@ -40,9 +41,10 @@ export function Mission() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // Random mission codes
+  // Random mission codes (set initial on mount to avoid hydration mismatch)
   useEffect(() => {
     const codes = ['ALPHA-001', 'BRAVO-247', 'CHARLIE-513', 'DELTA-889', 'ECHO-142'];
+    setMissionCode(codes[Math.floor(Math.random() * codes.length)]);
     const interval = setInterval(() => {
       setMissionCode(codes[Math.floor(Math.random() * codes.length)]);
     }, 3000);
@@ -140,7 +142,7 @@ export function Mission() {
               </div>
 
               {/* Center: Title */}
-              <div className="flex items-center gap-3">
+              <div className="hidden md:flex items-center gap-3">
                 <Target className="w-5 h-5 text-[#f7941d]" />
                 <div>
                   <div className="text-xs text-gray-600 font-mono uppercase tracking-wider">Our Purpose</div>
@@ -149,13 +151,13 @@ export function Mission() {
               </div>
 
               {/* Right: Live data */}
-              <div className="flex items-center gap-4 text-xs font-mono">
+              <div className="hidden sm:flex items-center gap-4 text-xs font-mono">
                 <div className="text-gray-600">
-                  CODE: <span className="text-[#f7941d]">{missionCode}</span>
+                  CODE: <span className="text-[#f7941d]">{missionCode || '---'}</span>
                 </div>
                 <div className="w-px h-6 bg-[#5a6b3f]/30" />
                 <div className="text-gray-600">
-                  {timestamp.toLocaleTimeString('en-US', { hour12: false })} UTC
+                  {timestamp ? timestamp.toLocaleTimeString('en-US', { hour12: false }) : '--:--:--'} UTC
                 </div>
               </div>
             </div>
@@ -178,7 +180,7 @@ export function Mission() {
                 <div key={i} className="w-1 h-1 bg-[#f7941d] rotate-45" />
               ))}
             </div>
-            <h2 className="text-5xl md:text-6xl font-semibold uppercase tracking-wider font-mono text-gray-900">Mission & Vision</h2>
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-semibold uppercase tracking-wider font-mono text-gray-900">Mission & Vision</h2>
             <div className="flex gap-1">
               {[...Array(5)].map((_, i) => (
                 <div key={i} className="w-1 h-1 bg-[#f7941d] rotate-45" />
@@ -215,7 +217,7 @@ export function Mission() {
                 className="absolute inset-0 rounded-2xl"
               />
               
-              <Card className="bg-white border-2 border-[#f7941d] p-8 h-full relative overflow-hidden shadow-xl">
+              <Card className="bg-white border-2 border-[#f7941d] p-4 sm:p-8 h-full relative overflow-hidden shadow-xl">
                 {/* Corner brackets */}
                 <div className="absolute top-0 left-0 w-12 h-12 border-t-2 border-l-2 border-[#f7941d]" />
                 <div className="absolute top-0 right-0 w-12 h-12 border-t-2 border-r-2 border-[#f7941d]" />
@@ -242,10 +244,10 @@ export function Mission() {
                     </div>
                     <div>
                       <div className="text-xs text-[#f7941d] font-mono uppercase tracking-wider mb-1">Primary Objective</div>
-                      <h3 className="text-3xl text-gray-900 font-mono">Our Mission</h3>
+                      <h3 className="text-2xl sm:text-3xl text-gray-900 font-mono">Our Mission</h3>
                     </div>
                   </div>
-                  <div className="px-3 py-1 bg-[#f7941d]/10 border border-[#f7941d] rounded text-xs font-mono text-[#f7941d]">
+                  <div className="hidden sm:block px-3 py-1 bg-[#f7941d]/10 border border-[#f7941d] rounded text-xs font-mono text-[#f7941d]">
                     CRITICAL
                   </div>
                 </div>
@@ -253,24 +255,24 @@ export function Mission() {
                 {/* Content */}
                 <div className="relative z-10">
                   <div className="bg-gray-50/80 border border-[#f7941d]/20 rounded-lg p-6 backdrop-blur-sm">
-                    <p className="text-gray-700 text-lg leading-relaxed">
+                    <p className="text-gray-800 text-base sm:text-lg leading-relaxed">
                       To support <span className="text-gray-900 font-semibold">NATO and partner nations</span> by providing expertise, education, and training in <span className="text-[#f7941d] font-semibold">civil-military cooperation</span>, enhancing their ability to operate effectively in complex environments through professional development and innovative solutions.
                     </p>
                   </div>
 
                   {/* Mission stats */}
-                  <div className="grid grid-cols-3 gap-4 mt-6">
-                    <div className="text-center p-3 bg-[#f7941d]/10 border border-[#f7941d]/30 rounded">
-                      <div className="text-2xl font-mono text-[#f7941d]">24+</div>
-                      <div className="text-xs text-gray-600 font-mono">Years Active</div>
+                  <div className="grid grid-cols-3 gap-2 sm:gap-4 mt-6">
+                    <div className="text-center p-2 sm:p-3 bg-[#f7941d]/10 border border-[#f7941d]/30 rounded">
+                      <div className="text-xl sm:text-2xl font-mono text-[#f7941d]">24+</div>
+                      <div className="text-[10px] sm:text-xs text-gray-600 font-mono">Years Active</div>
                     </div>
-                    <div className="text-center p-3 bg-[#f7941d]/10 border border-[#f7941d]/30 rounded">
-                      <div className="text-2xl font-mono text-[#f7941d]">2500+</div>
-                      <div className="text-xs text-gray-600 font-mono">Trained</div>
+                    <div className="text-center p-2 sm:p-3 bg-[#f7941d]/10 border border-[#f7941d]/30 rounded">
+                      <div className="text-xl sm:text-2xl font-mono text-[#f7941d]">2500+</div>
+                      <div className="text-[10px] sm:text-xs text-gray-600 font-mono">Trained</div>
                     </div>
-                    <div className="text-center p-3 bg-[#f7941d]/10 border border-[#f7941d]/30 rounded">
-                      <div className="text-2xl font-mono text-[#f7941d]">50+</div>
-                      <div className="text-xs text-gray-600 font-mono">Missions</div>
+                    <div className="text-center p-2 sm:p-3 bg-[#f7941d]/10 border border-[#f7941d]/30 rounded">
+                      <div className="text-xl sm:text-2xl font-mono text-[#f7941d]">50+</div>
+                      <div className="text-[10px] sm:text-xs text-gray-600 font-mono">Missions</div>
                     </div>
                   </div>
                 </div>
@@ -299,7 +301,7 @@ export function Mission() {
                 className="absolute inset-0 rounded-2xl"
               />
               
-              <Card className="bg-white border-2 border-[#5a6b3f] p-8 h-full relative overflow-hidden shadow-xl">
+              <Card className="bg-white border-2 border-[#5a6b3f] p-4 sm:p-8 h-full relative overflow-hidden shadow-xl">
                 {/* Corner brackets */}
                 <div className="absolute top-0 left-0 w-12 h-12 border-t-2 border-l-2 border-[#5a6b3f]" />
                 <div className="absolute top-0 right-0 w-12 h-12 border-t-2 border-r-2 border-[#5a6b3f]" />
@@ -326,10 +328,10 @@ export function Mission() {
                     </div>
                     <div>
                       <div className="text-xs text-[#5a6b3f] font-mono uppercase tracking-wider mb-1">Strategic Goal</div>
-                      <h3 className="text-3xl text-gray-900 font-mono">Our Vision</h3>
+                      <h3 className="text-2xl sm:text-3xl text-gray-900 font-mono">Our Vision</h3>
                     </div>
                   </div>
-                  <div className="px-3 py-1 bg-[#5a6b3f]/10 border border-[#5a6b3f] rounded text-xs font-mono text-[#5a6b3f]">
+                  <div className="hidden sm:block px-3 py-1 bg-[#5a6b3f]/10 border border-[#5a6b3f] rounded text-xs font-mono text-[#5a6b3f]">
                     PRIORITY
                   </div>
                 </div>
@@ -337,24 +339,24 @@ export function Mission() {
                 {/* Content */}
                 <div className="relative z-10">
                   <div className="bg-gray-50/80 border border-[#5a6b3f]/20 rounded-lg p-6 backdrop-blur-sm">
-                    <p className="text-gray-700 text-lg leading-relaxed">
+                    <p className="text-gray-800 text-base sm:text-lg leading-relaxed">
                       To be the <span className="text-gray-900 font-semibold">leading international centre of excellence</span> for civil-military cooperation, recognized for <span className="text-[#5a6b3f] font-semibold">innovative approaches</span>, operational relevance, and exceptional contribution to peace and security operations worldwide.
                     </p>
                   </div>
 
                   {/* Vision highlights */}
-                  <div className="grid grid-cols-3 gap-4 mt-6">
-                    <div className="text-center p-3 bg-[#5a6b3f]/10 border border-[#5a6b3f]/30 rounded">
-                      <Globe className="w-6 h-6 text-[#5a6b3f] mx-auto mb-1" />
-                      <div className="text-xs text-gray-600 font-mono">Global Reach</div>
+                  <div className="grid grid-cols-3 gap-1.5 sm:gap-4 mt-6">
+                    <div className="text-center p-1.5 sm:p-3 bg-[#5a6b3f]/10 border border-[#5a6b3f]/30 rounded">
+                      <Globe className="w-5 h-5 sm:w-6 sm:h-6 text-[#5a6b3f] mx-auto mb-1" />
+                      <div className="text-[9px] sm:text-xs text-gray-700 font-mono">Global</div>
                     </div>
-                    <div className="text-center p-3 bg-[#5a6b3f]/10 border border-[#5a6b3f]/30 rounded">
-                      <Zap className="w-6 h-6 text-[#5a6b3f] mx-auto mb-1" />
-                      <div className="text-xs text-gray-600 font-mono">Innovation</div>
+                    <div className="text-center p-1.5 sm:p-3 bg-[#5a6b3f]/10 border border-[#5a6b3f]/30 rounded">
+                      <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-[#5a6b3f] mx-auto mb-1" />
+                      <div className="text-[9px] sm:text-xs text-gray-700 font-mono">Innovation</div>
                     </div>
-                    <div className="text-center p-3 bg-[#5a6b3f]/10 border border-[#5a6b3f]/30 rounded">
-                      <Award className="w-6 h-6 text-[#5a6b3f] mx-auto mb-1" />
-                      <div className="text-xs text-gray-600 font-mono">Excellence</div>
+                    <div className="text-center p-1.5 sm:p-3 bg-[#5a6b3f]/10 border border-[#5a6b3f]/30 rounded">
+                      <Award className="w-5 h-5 sm:w-6 sm:h-6 text-[#5a6b3f] mx-auto mb-1" />
+                      <div className="text-[9px] sm:text-xs text-gray-700 font-mono">Excellence</div>
                     </div>
                   </div>
                 </div>
@@ -383,7 +385,7 @@ export function Mission() {
           </div>
 
           {/* Values Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((value, index) => {
               const isActive = activeValue === index;
               return (
@@ -468,7 +470,7 @@ export function Mission() {
                       {/* Description */}
                       <div className="relative z-10">
                         <div className="h-px w-full mb-3" style={{ backgroundColor: `${value.color}30` }} />
-                        <p className="text-gray-600 text-sm leading-relaxed">
+                        <p className="text-gray-700 text-sm leading-relaxed">
                           {value.description}
                         </p>
                       </div>

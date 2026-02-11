@@ -120,7 +120,7 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="mb-6"
           >
-            <h1 className="text-6xl md:text-8xl text-white mb-2 tracking-tight leading-[0.95]" style={{ fontWeight: 700 }}>
+            <h1 className="text-4xl sm:text-6xl md:text-8xl text-white mb-2 tracking-tight leading-[0.95]" style={{ fontWeight: 700 }}>
               <span className="block">CIVIL-MILITARY</span>
               <span className="block bg-gradient-to-r from-[#f7941d] via-[#ffa940] to-[#f7941d] bg-clip-text text-transparent animate-gradient">
                 COOPERATION
@@ -141,7 +141,7 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="mb-10 max-w-3xl"
           >
-            <p className="text-xl md:text-2xl text-[#e8e8e0] leading-relaxed tracking-wide">
+            <p className="text-base sm:text-xl md:text-2xl text-[#e8e8e0] leading-relaxed tracking-wide">
               Advancing <span className="text-[#f7941d]">operational excellence</span> through strategic cooperation between military forces and civilian organizations in complex operational environments.
             </p>
           </motion.div>

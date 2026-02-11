@@ -253,7 +253,7 @@ export function CIMICHandbook() {
                     <span className="text-xs font-mono text-[#f7941d] uppercase tracking-widest">Database Access</span>
                     <div className="h-px w-8 bg-[#f7941d]" />
                   </div>
-                  <h1 className="text-5xl md:text-6xl font-extrabold text-white uppercase tracking-wider">
+                  <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white uppercase tracking-wider">
                     CIMIC Handbook
                   </h1>
                 </div>

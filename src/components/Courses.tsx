@@ -329,7 +329,7 @@ export function Courses() {
               </div>
 
               {/* Center: Title */}
-              <div className="flex items-center gap-3">
+              <div className="hidden md:flex items-center gap-3">
                 <GraduationCap className="w-6 h-6 text-[#f7941d]" />
                 <div>
                   <div className="text-xs text-gray-400 font-mono uppercase tracking-wider">Training Division</div>
@@ -338,7 +338,7 @@ export function Courses() {
               </div>
 
               {/* Right: Stats */}
-              <div className="flex items-center gap-4 text-xs font-mono">
+              <div className="hidden sm:flex items-center gap-4 text-xs font-mono">
                 <div className="text-gray-400">
                   ANNUAL: <span className="text-[#f7941d]">500+ Graduates</span>
                 </div>
@@ -363,7 +363,7 @@ export function Courses() {
                 <div key={i} className="w-1 h-1 bg-[#f7941d] rotate-45" />
               ))}
             </div>
-            <h2 className="text-5xl md:text-6xl font-semibold uppercase tracking-wider font-mono">Training Programs</h2>
+            <h2 className="text-2xl sm:text-5xl md:text-6xl font-semibold uppercase tracking-wider font-mono">Training Programs</h2>
             <div className="flex gap-1">
               {[...Array(5)].map((_, i) => (
                 <div key={i} className="w-1 h-1 bg-[#f7941d] rotate-45" />

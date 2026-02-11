@@ -6,17 +6,21 @@ interface DataStreamProps {
   variant?: 'coordinates' | 'operations' | 'partnerships';
 }
 
+// Fixed positions per index to avoid hydration mismatch
+const fixedPositions = [
+  { top: '35%', left: '25%' },
+  { top: '55%', left: '60%' },
+  { top: '45%', left: '75%' },
+];
+
+const fixedRotations = [-2, 1.5, -1];
+
 export function TacticalDataStream({ index = 0, variant = 'coordinates' }: DataStreamProps) {
   const [data, setData] = useState<any>({});
+  const [statusCode, setStatusCode] = useState('');
 
-  // Random position for each stream - allow more overlap
-  const randomPosition = useMemo(() => ({
-    top: `${25 + Math.random() * 50}%`,
-    left: `${15 + Math.random() * 70}%`,
-  }), []);
-
-  // Random rotation for variety
-  const randomRotation = useMemo(() => Math.random() * 6 - 3, []);
+  const randomPosition = fixedPositions[index % fixedPositions.length];
+  const randomRotation = fixedRotations[index % fixedRotations.length];
 
   // Different green tints per variant
   const colorScheme = useMemo(() => {
@@ -87,9 +91,22 @@ export function TacticalDataStream({ index = 0, variant = 'coordinates' }: DataS
     };
 
     updateData();
-    const interval = setInterval(updateData, 200 + Math.random() * 300);
-    return () => clearInterval(interval);
-  }, [variant]);
+    const interval = setInterval(updateData, 300);
+
+    // Update status code in effect to avoid hydration mismatch
+    const updateCode = () => {
+      const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      const prefixes = ['CMC', 'CIV', 'MIL', 'OPS', 'LNK'];
+      setStatusCode(`${prefixes[index % prefixes.length]}-${letters[Math.floor(Math.random() * letters.length)]}${Math.floor(Math.random() * 9) + 1}`);
+    };
+    updateCode();
+    const codeInterval = setInterval(updateCode, 2000);
+
+    return () => {
+      clearInterval(interval);
+      clearInterval(codeInterval);
+    };
+  }, [variant, index]);
 
   const getHeaderLabel = () => {
     switch (variant) {
@@ -98,12 +115,6 @@ export function TacticalDataStream({ index = 0, variant = 'coordinates' }: DataS
       case 'partnerships': return 'CIVIL LIAISON';
       default: return 'DATA STREAM';
     }
-  };
-
-  const getStatusCode = () => {
-    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const prefixes = ['CMC', 'CIV', 'MIL', 'OPS', 'LNK'];
-    return `${prefixes[index % prefixes.length]}-${letters[Math.floor(Math.random() * letters.length)]}${Math.floor(Math.random() * 9) + 1}`;
   };
 
   return (
@@ -141,7 +152,7 @@ export function TacticalDataStream({ index = 0, variant = 'coordinates' }: DataS
               {getHeaderLabel()}
             </span>
           </div>
-          <span className="text-[#f7941d] text-[13px] font-mono">{getStatusCode()}</span>
+          <span className="text-[#f7941d] text-[13px] font-mono">{statusCode}</span>
         </div>
 
         {/* Data rows */}

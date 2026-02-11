@@ -119,7 +119,7 @@ export function KnowledgeHub({ onHandbookClick }: KnowledgeHubProps) {
                 />
               ))}
             </div>
-            <h2 className="text-5xl md:text-6xl font-semibold uppercase tracking-wider font-mono text-gray-900">
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-semibold uppercase tracking-wider font-mono text-gray-900">
               Do You <span className="text-[#f7941d]">Already</span> Know...
             </h2>
             <div className="flex gap-1">
